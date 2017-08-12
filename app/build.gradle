@@ -25,8 +25,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
 
     // RecyclerView
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -37,8 +38,12 @@ dependencies {
 
     // Preferences Dependencies
     compile 'com.android.support:preference-v7:25.3.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.google.firebase:firebase-messaging:11.0.4'
+
+    testCompile 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'com.google.gms.google-services'
