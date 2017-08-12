@@ -34,6 +34,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.google.firebase.iid.FirebaseInstanceId
 
 class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -85,6 +86,10 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
 
         // Start the loader
         supportLoaderManager.initLoader(LOADER_ID_MESSAGES, null, this)
+
+        val token = FirebaseInstanceId.getInstance().token
+        val msg = resources.getString(R.string.message_token_format, token)
+        Log.e(LOG_TAG, msg)
 
     }
 
