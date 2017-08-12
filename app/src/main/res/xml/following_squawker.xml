@@ -46,7 +46,4 @@
         android:summaryOn="@string/follow_summary_following"
         android:title="@string/follow_title_switch_nikita" />
 
-
-
-
 </PreferenceScreen>

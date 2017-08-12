@@ -41,6 +41,23 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
     lateinit internal var mLayoutManager: LinearLayoutManager
     lateinit internal var mAdapter: SquawkAdapter
 
+    companion object {
+
+        private val LOG_TAG = MainActivity::class.java.simpleName
+        private val LOADER_ID_MESSAGES = 0
+
+        internal val MESSAGES_PROJECTION = arrayOf(
+                SquawkContract.COLUMN_AUTHOR,
+                SquawkContract.COLUMN_MESSAGE,
+                SquawkContract.COLUMN_DATE,
+                SquawkContract.COLUMN_AUTHOR_KEY
+        )
+
+        internal val COL_NUM_AUTHOR = 0
+        internal val COL_NUM_MESSAGE = 1
+        internal val COL_NUM_DATE = 2
+        internal val COL_NUM_AUTHOR_KEY = 3
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,10 +113,17 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         // This method generates a selection off of only the current followers
         val selection = SquawkContract.createSelectionForCurrentFollowers(
-                PreferenceManager.getDefaultSharedPreferences(this))
+                PreferenceManager.getDefaultSharedPreferences(this)
+        )
         Log.d(LOG_TAG, "Selection is " + selection)
-        return CursorLoader(this, SquawkProvider.SquawkMessages.CONTENT_URI,
-                MESSAGES_PROJECTION, selection, null, SquawkContract.COLUMN_DATE + " DESC")
+        return CursorLoader(
+                this,
+                SquawkProvider.SquawkMessages.CONTENT_URI,
+                MESSAGES_PROJECTION,
+                selection,
+                null,
+                SquawkContract.COLUMN_DATE + " DESC"
+        )
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
@@ -108,23 +132,5 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
         mAdapter.swapCursor(null)
-    }
-
-    companion object {
-
-        private val LOG_TAG = MainActivity::class.java.simpleName
-        private val LOADER_ID_MESSAGES = 0
-
-        internal val MESSAGES_PROJECTION = arrayOf(
-                SquawkContract.COLUMN_AUTHOR,
-                SquawkContract.COLUMN_MESSAGE,
-                SquawkContract.COLUMN_DATE,
-                SquawkContract.COLUMN_AUTHOR_KEY
-        )
-
-        internal val COL_NUM_AUTHOR = 0
-        internal val COL_NUM_MESSAGE = 1
-        internal val COL_NUM_DATE = 2
-        internal val COL_NUM_AUTHOR_KEY = 3
     }
 }

@@ -25,13 +25,12 @@ import android.support.v7.preference.PreferenceFragmentCompat
  */
 class FollowingPreferenceFragment : PreferenceFragmentCompat() {
 
+    companion object {
+        private val LOG_TAG = FollowingPreferenceFragment::class.java.simpleName
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         // Add visualizer preferences, defined in the XML file in res->xml->preferences_squawker
         addPreferencesFromResource(R.xml.following_squawker)
-    }
-
-    companion object {
-
-        private val LOG_TAG = FollowingPreferenceFragment::class.java.simpleName
     }
 }
