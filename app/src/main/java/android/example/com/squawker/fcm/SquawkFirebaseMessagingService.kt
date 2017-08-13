@@ -51,7 +51,7 @@ class SquawkFirebaseMessagingService: FirebaseMessagingService() {
         val author = data[JSON_KEY_AUTHOR]
         var message = data[JSON_KEY_MESSAGE]!!
         if (message.length > NOTIFICATION_MAX_LENGTH) {
-            message = message.substring(0..NOTIFICATION_MAX_LENGTH) + "..."
+            message = message.substring(0..NOTIFICATION_MAX_LENGTH) + "\u2026"
         }
         val notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(this)
