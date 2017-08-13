@@ -56,7 +56,7 @@ class SquawkFirebaseMessagingService: FirebaseMessagingService() {
         val notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_duck)
-                .setContentTitle(String.format(getString(R.string.notification_message), author))
+                .setContentTitle(getString(R.string.notification_message, author))
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(notificationSound)
